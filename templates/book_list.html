@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)https://getbootstrap.com/docs/3.3/examples/dashboard/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/dashboard.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li ><a href="/publisher_list/">出版社列表 <span class="sr-only">(current)</span></a></li>
+            <li class="active"><a href="/book_list/">书籍列表</a></li>
+            <li><a href="/author_list/">作者列表</a></li>
+          </ul>
+
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">书籍管理列表</h1>
+        <a class="btn btn-sm btn-success" style="margin-top: 5px;" href="/add_book/">添加书籍</a>
+        <table border="1" class="table table-striped" style="margin-top: 2px">
+
+    <thead>
+        <tr>
+{#            <th>#</th>#}
+            <th>id</th>
+            <th>title</th>
+            <th>出版社</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in all_book %}
+            <tr>
+{#                <td>{{ forloop.counter }}</td>#}
+                <td>{{ i.id }}</td>
+                <td>{{ i.title }}</td>
+                <td>{{ i.publisher.name }}</td>
+                <td>
+                    <a class="btn btn-success btn-sm" href="/edit_book/?id={{ i.id }}">编辑</a>
+                    <a class="btn btn-danger btn-sm"  href="/delete_book/?id={{ i.id }}">删除</a>
+
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+</head>
+<body style="margin-top: 10px">
+
+<a class="btn btn-success" href="/add_user/" role="button">添加用户</a>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <td>id</td>
+            <td>用户名</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in user_list %}
+           <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+           </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+</body>
+</html>
