@@ -1,64 +1,35 @@
-<!DOCTYPE html>
-<!-- saved from url=(0053)https://getbootstrap.com/docs/3.3/examples/dashboard/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-    <title>Dashboard Template for Bootstrap</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/static/css/bootstrap.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/static/css/dashboard.css" rel="stylesheet">
-
-  </head>
-
-  <body>
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="/publisher_list/">出版社列表 <span class="sr-only">(current)</span></a></li>
-            <li><a href="/book_list/">书籍列表</a></li>
-            <li><a href="/author_list/">作者列表</a></li>
-          </ul>
-
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">出版社信息</h1>
-        <div class=" pull-left" style="margin-top: 2px">
-            <a class="btn btn-sm btn-success" style="margin-top: 2px;" href="/add_publisher/">新增</a>
-        </div>
-
-        <table border="1" class="table table-striped" style="margin-top: 2px">
-            <thead>
-                <tr>
-                    <th>序号</th>
-                    <th style="display: none">ID</th>
-                    <th>出版社名称</th>
-                    <th>操作</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for publisher in publisher_list %}
-                    <tr>
-                        <td>{{ forloop.counter }}</td>
-                        <td style="display: none">{{ publisher.id }}</td>
-                        <td>{{ publisher.name }}</td>
-                        <td>
-                            <a class="btn btn-danger btn-sm" href="/delete_publisher/?id={{ publisher.id }}">删除</a>
-                            <a class="btn btn-primary btn-sm" href="/edit_publisher/?id={{ publisher.id }}">修改</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-    </table>
-          </div>
-        </div>
-      </div>
+{% extends 'base.html' %}
+{% block page-main %}
+    <h1 class="page-header">出版社信息</h1>
+    <div class=" pull-left" style="margin-top: 2px">
+        <a class="btn btn-sm btn-success" style="margin-top: 2px;" href="/add_publisher/">新增</a>
     </div>
 
+    <table class="table table-striped" style="margin-top: 2px">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th style="display: none">ID</th>
+            <th>出版社名称</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for publisher in publisher_list %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td style="display: none">{{ publisher.id }}</td>
+                <td>{{ publisher.name }}</td>
+                <td>
+                    <a class="btn btn-danger btn-sm" href="/delete_publisher/?id={{ publisher.id }}">删除</a>
+                    <a class="btn btn-primary btn-sm" href="/edit_publisher/?id={{ publisher.id }}">修改</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
 
 
-</body>
-</html>
+

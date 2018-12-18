@@ -77,7 +77,7 @@ def book_list(request):
     """书列表"""
     if request.method == "GET":
         all_book = models.Book.objects.all()
-        return render(request,"book_list.html",{"all_book":all_book})
+        return render(request,"book_list2.html",{"all_book":all_book})
 
 
 def add_book(request):
@@ -171,6 +171,10 @@ def edit_author(request):
     #查询所有的书籍对象
     ret = models.Book.objects.all()
     return render(request,"edit_author.html",{"book_list":ret,"author":edit_author_obj})
+
+
+
+
 
 
 

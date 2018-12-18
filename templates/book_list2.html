@@ -1,0 +1,36 @@
+{#继承#}
+{% extends 'base.html' %}
+
+
+{#把自己页面的内容赛到母版里面相应的位置#}
+{% block page-main %}
+    <h1 class="page-header">书籍管理列表</h1>
+    <a class="btn btn-sm btn-success" style="margin-top: 5px;" href="/add_book/">添加书籍</a>
+    <table class="table table-striped" style="margin-top: 2px">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>title</th>
+            <th>出版社</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for i in all_book %}
+            <tr>
+                <td>{{ i.id }}</td>
+                <td>{{ i.title }}</td>
+                <td>{{ i.publisher.name }}</td>
+                <td>
+                    <a class="btn btn-success btn-sm" href="/edit_book/?id={{ i.id }}">编辑</a>
+                    <a class="btn btn-danger btn-sm" href="/delete_book/?id={{ i.id }}">删除</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td class="text-center">暂时空空如也，没有数据哦~</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
