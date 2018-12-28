@@ -1,5 +1,7 @@
-from django.shortcuts import render,HttpResponse,redirect
-
+from django.shortcuts import render,redirect
+from django.views import View
+from django.urls import reverse
+from django.http import JsonResponse,HttpResponse
 from app01 import models
 
 # def user_list(request):
@@ -26,22 +28,42 @@ from app01 import models
 
 
 def publisher_list(request):
-    """查看出版社列表"""
+    """FBV方式查看出版社列表"""
     ret = models.Publisher.objects.all().order_by("id")
     return render(request,"publisher_list.html",{"publisher_list":ret})
 
 
-def add_publisher(request):
-    """添加书籍"""
-    error_msg = ""
-    if request.method == "POST":
+# def add_publisher(request):
+#     """添加出版社"""
+#     error_msg = ""
+#     if request.method == "POST":
+#         publisher_name = request.POST.get("publisher_name")
+#         if publisher_name:
+#             models.Publisher.objects.create(name=publisher_name)
+#             return redirect("/publisher_list/")
+#         else:
+#             error_msg = "不能为空！"
+#     return render(request,"add_publisher.html",{"error":error_msg})
+
+
+class AddPublisher(View):
+    """CBV方式添加出版社"""
+    def get(self,request):
+        print(request.path_info)
+        return render(request, "add_publisher.html")
+
+    def post(self,request):
+        print(request.body)
+        print("=" *120)
+        error_msg = ""
         publisher_name = request.POST.get("publisher_name")
         if publisher_name:
             models.Publisher.objects.create(name=publisher_name)
             return redirect("/publisher_list/")
         else:
             error_msg = "不能为空！"
-    return render(request,"add_publisher.html",{"error":error_msg})
+            return render(request,"add_publisher.html",{"error":error_msg})
+
 
 
 def delete_publisher(request):
@@ -50,11 +72,11 @@ def delete_publisher(request):
     #如果能取到ID值
     if del_id:
         #根据ID值查找到数据
-        del_obj = models.Publisher.objects.filter(id=del_id)
-        del_obj.delete()
+        del_obj = models.Publisher.objects.filter(id=del_id).delete()
         return redirect("/publisher_list")
     else:
         return HttpResponse("error")
+
 
 
 def edit_publisher(request):
@@ -65,7 +87,8 @@ def edit_publisher(request):
         edit_publisher = models.Publisher.objects.get(id=edit_id)
         edit_publisher.name = new_name
         edit_publisher.save()
-        return redirect("/publisher_list/")
+        url = reverse('publisher_test')
+        return redirect(url)
 
     edit_id = request.GET.get("id",None)
     if edit_id:
@@ -171,6 +194,19 @@ def edit_author(request):
     #查询所有的书籍对象
     ret = models.Book.objects.all()
     return render(request,"edit_author.html",{"book_list":ret,"author":edit_author_obj})
+
+
+
+def upload(request):
+    if request.method == "GET":
+        return render(request,'upload.html')
+    elif request.method == "POST":
+        print(request.FILES)
+        filename = request.FILES['upload_file'].name
+        with open(filename,'wb') as f:
+            for chunk in request.FILES["upload_file"].chunks():
+                f.write(chunk)
+        return HttpResponse("OK")
 
 
 
