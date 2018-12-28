@@ -13,6 +13,6 @@ def allprojects():
 
 
 if __name__ == '__main__':
-    gl = gitlab.Gitlab('http://10.128.46.40/', private_token='udeR7ZU9JZ7uNzkaM7yR')
+    gl = gitlab.Gitlab('http://1.1.1.1/', private_token='udeR7ZU9JZ7uNzkaM7yR')
     info = {1:'allprojects()'}
     serp = '-' * 20

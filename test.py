@@ -28,7 +28,7 @@ headers = {
 }
 groups = []
 
-response = requests.get('http://10.128.46.40/api/v3/groups/osCloud', headers=headers)
+response = requests.get('http://1.1.1.1/api/v3/groups/osCloud', headers=headers)
 lst = str(response.content,encoding='utf-8')
 lst_3 = json.loads(lst)
 # print(lst_3)

@@ -34,7 +34,7 @@ groups = []
 # print(len(groups))
 
 
-response = requests.get(f'http://10.128.46.40/api/v3/groups/?per_page=100', headers=headers)
+response = requests.get(f'http://1.1.1.1.1/api/v3/groups/?per_page=100', headers=headers)
 lst = str(response.content,encoding='utf-8')
 lst_3 = json.loads(lst)
 print(lst_3)
