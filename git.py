@@ -23,7 +23,7 @@ headers = {
 }
 groups = []
 # for i in range(1,5):
-#     response = requests.get(f'http://10.128.46.40/api/v3/groups/?page{i}', headers=headers)
+#     response = requests.get(f'http://1.1.1.1/api/v3/groups/?page{i}', headers=headers)
 #     lst = str(response.content,encoding='utf-8')
 #     lst_3 = json.loads(lst)
 #     print(lst_3)
