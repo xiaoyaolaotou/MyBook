@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AJAX局部刷新实例</title>
+</head>
+<body>
+{##}
+{#{% csrf_token %}#}
+<input type="text" id="i1">+
+<input type="text" id="i2">=
+<input type="text" id="i3">
+<input type="button" value="AJAX提交" id="b1">
+<input type="button" value="AJAX提交POST" id="b2">
+
+<form action="/form_add/" method="POST">
+    {% csrf_token %}
+    <input type="text" name="user">
+    <input type="password" name="pwd">
+    <input type="submit" value="提交">
+</form>
+
+
+
+<script src="/static/js/jquery-3.1.1.min.js"></script>
+<script src="/static/js/setupajax.js"></script>
+<script>
+  $("#b1").on("click", function () {
+      var i1 = $("#i1").val();
+      var i2 = $("#i2").val();
+      $.ajax({
+          url: '{% url "ajax_add" %}',
+          type: "get",
+          data:{'i1':i1,'i2':i2},
+          success:function (arg) {
+{#              alert(arg)#}
+              $("#i3").val(arg);
+          }
+      })
+
+  });
+
+    $("#b2").on("click", function () {
+      var i1 = $("#i1").val();
+      var i2 = $("#i2").val();
+      $.ajax({
+          url: '{% url "ajax_add_post" %}',
+          type: "post",
+          data:{'i1':i1,'i2':i2},
+          success:function (arg) {
+{#              alert(arg)#}
+              //$("#i3").val(arg);
+              alert(arg);
+          }
+      })
+
+  })
+</script>
+</body>
+</html>
+

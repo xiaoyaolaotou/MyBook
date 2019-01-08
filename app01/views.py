@@ -3,6 +3,8 @@ from django.views import View
 from django.urls import reverse
 from django.http import JsonResponse,HttpResponse
 from app01 import models
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
+
 
 # def user_list(request):
 #     """
@@ -27,9 +29,38 @@ from app01 import models
 #     return render(request,'add_user.html')
 
 
+
 def publisher_list(request):
     """FBV方式查看出版社列表"""
+    #从URL取page分页参数
+    # page_num  = request.GET.get("page")
+    # print(page_num,type(page_num))
+    # page_num = int(page_num)#转换成int类型
+    #
+    # #定义两个变量保存数据从哪儿取到哪儿
+    # data_stat = (page_num - 1) * 10
+    # data_end = page_num * 10
+    # #
+    # # 每一页显示多少条数据
+    per_page = 10
+
+    #总数据是多少
+    total_count = models.Publisher.objects.all().count()
+
+    # 总共需要多少页码来展示
+    # total_page,m = divmod(total_count,per_page)
+    # if m:
+    #     total_page += 1
     ret = models.Publisher.objects.all().order_by("id")
+
+    #自己接接分页的HTML代码
+    #
+    # html_str_list = []
+    # for i in range(1,total_page+1):
+    #     tmp = '<li><a href="{% url "publisher_test" %}?page={0}">{0}</a></li>'.format(i)
+    #     html_str_list.append(tmp)
+    # page_html = "".join(html_str_list)
+
     return render(request,"publisher_list.html",{"publisher_list":ret})
 
 

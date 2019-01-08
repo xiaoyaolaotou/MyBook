@@ -25,14 +25,7 @@ class Book(models.Model):
         return self.title
 
 
-class Author(models.Model):
-    """作者表"""
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=32,null=False,unique=True)
-    book = models.ManyToManyField(to="Book")
 
-    def __str__(self):
-        return self.name
 
 
 class Person(models.Model):
@@ -42,6 +35,24 @@ class Person(models.Model):
 
     def __str__(self):
         return self.name
+
+
+
+class Author(models.Model):
+    """作者表"""
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=32,null=False,unique=True)
+    book = models.ManyToManyField(to="Book")
+    detail = models.OneToOneField(to='AuthorDetail',on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+
+class AuthorDetail(models.Model):
+    """作者爱好"""
+    hobby = models.CharField(max_length=32,verbose_name='爱好')
+    addr = models.CharField(max_length=128,verbose_name='地址')
 
 
 

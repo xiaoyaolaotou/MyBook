@@ -45,11 +45,14 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'app02.my_middleware.ZiDingYi',
+    'app02.my_middleware.MD2',
 ]
+# from django.middleware.csrf import CsrfViewMiddleware
 
 ROOT_URLCONF = 'mysite.urls'
 

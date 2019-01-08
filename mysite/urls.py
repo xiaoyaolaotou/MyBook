@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include,re_path
 from app01 import views
+from app02 import views as v4
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -39,6 +40,9 @@ urlpatterns = [
     # path('login/', login.login),
     # path('user_list/', views.user_list),
     # path('add_user/', views.add_user),
+
+    re_path(r'^app02/',include('app02.urls')),
+
 ]
 
 
